@@ -1,36 +1,34 @@
-import "./products.css";
-import React, { useState, useEffect } from "react";
-import testData from './testdata.json';
 
+import React, { useState, useEffect } from 'react';
+import "./products.css"
 
-const Products = () => {
-    const [data, setData] = useState(null);
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        setData(testData);
-    }, []);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-    return (
-        <div>
-            {data && (
-                <div >
-                    {data.map((category, index) => (
-                        <div key={index}>
-                            <h2>{Object.keys(category)[0]}</h2>
-                            
-                            <ul className='product-container' >
-                                {Object.entries(category[Object.keys(category)[0]]).map(([product, price], i) => (
-                                    <li className="product-card" key={i}>
-                                        {product}: {price}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-    )
-}
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('/api/products');
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
 
-export default Products;
+  return (
+    <div className='product-container'>
+      <h1>Product List</h1>
+      <ul>
+        {products.map((product, index) => (
+          <li key={index}>{product.name} - {product.price}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductList;

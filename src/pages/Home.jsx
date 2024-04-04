@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Products from '../components/products';
 import "../components/products.css";
+import ProductList from '../components/products';
 
 
 const Home = () => {
@@ -10,7 +11,7 @@ const Home = () => {
     <div>
     <Header/>
     <div >
-    <Products />
+    <ProductList />
     </div>
     
     <Footer/>
