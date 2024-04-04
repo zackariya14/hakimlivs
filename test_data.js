@@ -1,0 +1,39 @@
+const fs = require('fs');
+
+const data = {
+    "mejeri": {
+        "smör": 30,
+        "mjölk": 20,
+        "ost": 78,
+        "ägg": 38,
+        "yoghurt": 25
+    },
+    "bröd, kex & kakor": {
+        "donut": 10,
+        "digestivekakor": 25,
+        "knäckebröd": 20,
+        "skogaholmslimpa": 27,
+        "italienskt lantbröd": 35
+    },
+    "frukt & grönt PER STYCK": {
+        "broccoli": 15,
+        "tomat": 5,
+        "lök": 3,
+        "banan": 5,
+        "äpple": 6
+    },
+    "DRYCK": {
+        "Pepsi max": 25,
+        "Monster": 20,
+        "Red bull": 20,
+        "STARBUCKSKaffe": 35,
+        "GLOCKENGOLD Fruktdryck Multivitamin": 23
+    }
+};
+
+const jsonData = JSON.stringify(data, null, 4);
+
+fs.writeFile('testdata.json', jsonData, (err) => {
+    if (err) throw err;
+    console.log('JSON-filen har skapats.');
+});
