@@ -15,6 +15,11 @@ const ProductList = () => {
       const data = await response.json();
       setProducts(data);
     } catch (error) {
+      let products = [
+        { id: 1, name: 'Apple', price: 1.99 },
+        { id: 2, name: 'Banana', price: 0.99 },
+      ];
+      setProducts(products)
       console.error('Error fetching products:', error);
     }
   };
