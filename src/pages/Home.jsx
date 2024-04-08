@@ -1,19 +1,22 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Products from '../components/products';
 import "../components/products.css";
-import ProductList from '../components/products';
+import ProductList from '../components/productlist';
+import Sidebar from '../components/Sidebar';
+
 
 
 const Home = () => {
   return (
     <div>
     <Header/>
-    <div >
+    <div className='main'>
+      
     <ProductList />
-    </div>
-    
+    </div>    
+    <Sidebar />
+
     <Footer/>
    </div>
   )
