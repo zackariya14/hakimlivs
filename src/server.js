@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import productRouter from '../routes/product.route.js';
+import productRouter from '../backend/routes/product.route.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
