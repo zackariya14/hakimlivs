@@ -6,14 +6,23 @@
   }
   
   .product-card {
+    display: flex; /* Lägg till flex display för att justera innehållet */
+    flex-direction: column; /* Låt innehållet staplas vertikalt */
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 40px;
+    padding: 20px; /* Minska padding för att ge mer utrymme för innehållet */
     margin: 25px;
-    max-width: 80px;
+    max-width: 300px; /* Justera storleken på kortet efter behov */
     list-style-type: none;
-  }
+}
+
+.product-card img {
+    max-width: 100%; /* Sätt maximal bredd för bilden till 100% av förälderns bredd */
+    height: auto; /* Låt höjden anpassa sig automatiskt för att undvika förvrängning */
+    border-radius: 8px 8px 0 0; /* Runda hörnen på bilden (valfritt) */
+}
+
   
   .product-card h2 {
     font-size: 1.2rem;
