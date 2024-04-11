@@ -1,6 +1,6 @@
 import { connectToDatabase } from './db.js';
 import Product from './models.js';
-import Category from './categorymodel.js';
+import Category from '../models/categorymodel.js';
 
 const main = async () => {
     await connectToDatabase();
