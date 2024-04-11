@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import productRouter from '../routes/product.route.js';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 7000;
 
 mongoose.connect('mongodb+srv://OlleOllsson:test1234@hakimslivs4.zrzjb7b.mongodb.net/', {
     
