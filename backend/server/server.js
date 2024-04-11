@@ -6,7 +6,7 @@ import Product from './models.js';
 const app = express();
 const PORT = process.env.PORT || 5000; 
 
-mongoose.connect('mongodb+srv://OlleOllsson:test1234@hakimslivs4.zrzjb7b.mongodb.net/', {
+mongoose.connect('mongodb+srv://Sbmm:mm2307@hakimslivs4.zrzjb7b.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

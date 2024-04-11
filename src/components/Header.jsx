@@ -1,6 +1,8 @@
 import React from "react";
 import "./Home.css";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+
 
 const Header = () => {
   return (
@@ -8,7 +10,8 @@ const Header = () => {
       <div className="leftHeader">
         <div className="search">
           <div className="language"> SV </div>
-          <input type="text" placeholder="Sök..." /> <Search />
+          <input type="text" placeholder="Sök..." />
+          <Search />
         </div>
       </div>
 
@@ -17,11 +20,15 @@ const Header = () => {
       </div>
 
       <div className="rightHeader">
-        
-        
-       <div className="cart"> <ShoppingCartOutlined /></div>
-      
-      
+        <div className="logBtn">
+          <Link to="/login" >
+            <button>Logga in</button>
+          </Link>
+        </div>
+
+        <div className="cart">
+          <ShoppingCartOutlined />
+        </div>
       </div>
     </div>
   );

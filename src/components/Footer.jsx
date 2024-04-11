@@ -1,6 +1,6 @@
 
 
-import { CopyrightOutlined, Facebook, Instagram, Twitter,  } from '@mui/icons-material';
+import { CopyrightOutlined, Facebook, Instagram, Twitter, Pinterest  } from '@mui/icons-material';
 import React from 'react';
 
 const Footer = () => {
@@ -14,7 +14,7 @@ const Footer = () => {
        
        
        
-        <div className="rightFooter"> <Twitter/> <Instagram/> <Facebook/> </div>
+        <div className="rightFooter"> <Pinterest/> <Twitter/> <Instagram/> <Facebook/> </div>
     
     </footer>
     </div>
