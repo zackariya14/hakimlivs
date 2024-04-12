@@ -1,19 +1,25 @@
 import React from 'react';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 import "../components/products.css";
 import ProductList from '../components/productlist';
 import Sidebar from '../components/Sidebar';
 
+
+
 const Home = () => {
   return (
     <div>
-      <div className='main'>
-        <ProductList />
-      </div>    
-      <Sidebar />
-      <Footer/>
-    </div>
-  );
-};
+    <Header/>
+    
+      
+    <ProductList />
+      
+    <Sidebar />
 
-export default Home;
+    <Footer/>
+   </div>
+  )
+}
+
+export default Home

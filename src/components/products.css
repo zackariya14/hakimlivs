@@ -6,14 +6,24 @@
   }
   
   .product-card {
+    display: flex; 
+    flex-direction: column; 
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 40px;
+    padding: 20px; 
     margin: 25px;
-    max-width: 80px;
+    max-width: 300px; 
     list-style-type: none;
-  }
+    float: left;
+}
+
+.product-card img {
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 8px 8px 0 0; 
+}
+
   
   .product-card h2 {
     font-size: 1.2rem;

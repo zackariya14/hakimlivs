@@ -1,128 +1,112 @@
-import Product from "../models/product.model.js";
+import mongoose from 'mongoose';
+import Product from '../models/product.model.js';
+import Category from '../models/categorymodel.js';
 
-export const createProduct = async (req, res) => {
-  console.log("product test");
-  if (!req.body) {
-    return res.status(400).json({
-      error: "No body submitted",
-    });
-  }
-  console.log("REQBODY: ", req.body);
-  try {
-    const product = new Product(req.body);
-    await product.save();
-    res.status(201).json(product);
-  } catch (err) {
-    console.log(err.message);
-    res
-      .status(500)
-      .json({ message: "Error with post request.", error: err.message });
-  }
-};
-
-export const getProducts = async (req, res) => {
-  if (req.query) {
-    let page = parseInt(req.query.page) || 1;
-    let pageSize = parseInt(req.query.pageSize) || 10;
-    let pageSkip = page - 1;
+export async function createProduct(req, res) {
     try {
-      const products = await Product.find().skip(pageSkip).limit(pageSize);
-      return res.status(200).json(products);
-    } catch (err) {
-      console.log(err.message);
-      return res.status(500).json({
-        error: err.message,
-      });
+        const { name, category, price, imageURL, description } = req.body;
+
+        if (!name || !price) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        let categoryId;
+
+        
+        if (mongoose.Types.ObjectId.isValid(category)) {
+            categoryId = category;
+        } else {
+            const foundCategory = await Category.findOne({ name: category });
+            if (!foundCategory) {
+                return res.status(404).json({ message: "Category not found" });
+            }
+            categoryId = foundCategory._id;
+        }
+
+        const newProduct = new Product({
+            "name": name,
+            "category": categoryId,
+            "price": price,
+            "imageURL": imageURL
+        });
+
+        console.log("newProduct: ", newProduct);
+        
+        const savedProduct = await newProduct.save();
+        res.status(201).send(savedProduct);
+    } catch (error) {
+        console.log("Error in createProduct:", error);
+        res.status(400).json({ message: "Error in createProduct" });
     }
-  }
+}
 
-  try {
-    const products = await Product.find();
-    res.status(200).json(products);
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-    console.log(err.message);
-  }
-};
-
-export const getProductById = async (req, res) => {
-  console.log("test product by ID");
-  if (!req.params.id) {
-    return res.status(400).json({
-      error: "No id submitted",
-    });
-  }
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).json({
-        error: "Product not found.",
-      });
+export async function getProducts(req, res) {
+    try {
+        const products = await Product.find();
+        res.status(200).send(products);
+        console.log("Products: ", products);
+    } catch (error) {
+        console.error("Error in getProducts:", error);
+        res.status(500).json({ message: "Internal server error" });
     }
-    res.status(200).json(product);
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-};
+}
 
-export const updateProductById = async (req, res) => {
-  console.log("test update product by id");
-  if (!req.params.id) {
-    return res.status(400).json({
-      error: "No id submitted",
-    });
-  }
 
-  if (!req.body) {
-    return res.status(400).json({
-      error: "No body submitted",
-    });
-  }
+export async function searchProducts(req, res) {
+    try {
+        const { query } = req.body;
 
-  const { id } = req.params;
-  try {
-    const product = await Product.findByIdAndUpdate({ _id: id }, req.body);
-    if (product) {
-      res.status(200).json({
-        message: "Product updated successfully",
-        updated_product: product,
-      });
+        const products = await Product.find({
+            $or: [
+                { name: { $regex: query, $options: 'i' } }, 
+                { category: { $in: await Category.find({ name: { $regex: query, $options: 'i' } }).select('_id') } } 
+            ]
+        }).populate('category');
+        res.status(200).send(products);
+    } catch (error) {
+        console.error("Error searching products", error);
+        res.status(500).json({ message: "Error" });
     }
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-};
+}
 
-export const deleteProductById = async (req, res) => {
-  console.log("test delete product by id");
-  if (!req.params.id) {
-    return res.status(400).json({
-      error: "No id submitted",
-    });
-  }
+export async function editProduct(req, res) {
+    try {
+        const id = req.params.id;
+        const { name, category, price, imageURL, description } = req.body;
 
-  const { id } = req.params;
+        if (!id || !name || !category || !price || !imageURL) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
 
-  try {
-    const product = await Product.findByIdAndDelete({ _id: id }, req.body);
-    if (product) {
-      res.status(200).json({
-        message: "Product deleted successfully",
-        deleted_product: product,
-      });
+        const updatedProduct = await Product.findByIdAndUpdate(id, { name, category, price, imageURL }, { new: true });
+        console.log(updatedProduct)
+        res.status(200).send(updatedProduct)
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
     }
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).json({
-      error: err.message,
-    });
-  }
-};
+}
+
+export async function deleteProduct(req, res) {
+    try {
+        const id = req.params.id;
+        console.log(id)
+        if (!id) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+        const deletedProduct = await Product.findByIdAndDelete(id);
+        console.log(deletedProduct)
+        res.status(200).send(deletedProduct)
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+}
+
+export async function startMessage(req, res) {
+    res.status(200).send("Hello world")
+}

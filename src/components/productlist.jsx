@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './products.css';
 
 function ProductList() {
   const [products, setProducts] = useState([]);
@@ -7,7 +8,7 @@ function ProductList() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products`);
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -18,15 +19,14 @@ function ProductList() {
   }, []);
 
   return (
-    <div>
-      <h1>Product List</h1>
+    <div className='product-container'>
       <ul>
         {products.map(product => (
-          <li key={product._id}>
+          <li className='product-card' key={product._id}>
             <h2>{product.name}</h2>
             <p>Price: {product.price}</p>
             <p>Description: {product.description}</p>
-            <img src={product.image} alt={product.name} />
+            <img src={product.Image} alt={product.name} />
           </li>
         ))}
       </ul>
