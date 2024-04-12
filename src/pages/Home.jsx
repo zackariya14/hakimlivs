@@ -11,10 +11,10 @@ const Home = () => {
   return (
     <div>
     <Header/>
-    <div className='main'>
-      
+    
+    
     <ProductList />
-    </div>    
+      
     <Sidebar />
 
     <Footer/>
