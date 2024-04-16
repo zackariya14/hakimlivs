@@ -27,7 +27,7 @@ export async function createProduct(req, res) {
             "name": name,
             "category": categoryId,
             "price": price,
-            "imageURL": Image,
+            "Image": Image,
             "description": description
         });
 
