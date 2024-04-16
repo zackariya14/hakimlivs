@@ -4,7 +4,7 @@ import Category from '../models/categorymodel.js';
 
 export async function createProduct(req, res) {
     try {
-        const { name, category, price, imageURL, description } = req.body;
+        const { name, category, price, Image, description } = req.body;
 
         if (!name || !price) {
             return res.status(400).json({ message: "Missing required fields" });
@@ -27,7 +27,8 @@ export async function createProduct(req, res) {
             "name": name,
             "category": categoryId,
             "price": price,
-            "imageURL": imageURL
+            "imageURL": Image,
+            "description": description
         });
 
         console.log("newProduct: ", newProduct);
