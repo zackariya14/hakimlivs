@@ -1,4 +1,4 @@
-// Sidebar.jsx
+
 import React, { useState } from 'react';
 import './Sidebar.css';
 
@@ -20,6 +20,7 @@ const Sidebar = () => {
           <li><a href="#">Produkter</a></li>
           <li><a href="#">Kampanjer</a></li>
           <li><a href="#">Kundtjänst</a></li>
+          <li><a href="/login">Admin</a></li>
         </ul>
       </div>
     </div>

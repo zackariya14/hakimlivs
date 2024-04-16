@@ -9,7 +9,6 @@ const Header = () => {
     <div className="header-container">
       <div className="leftHeader">
         <div className="search">
-          <div className="language"> SV </div>
           <input type="text" placeholder="Sök..." />
           <Search />
         </div>

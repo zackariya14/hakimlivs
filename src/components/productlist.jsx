@@ -20,7 +20,7 @@ function ProductList() {
 
   return (
     <div className='product-container'>
-      <ul>
+      
         {products.map(product => (
           <li className='product-card' key={product._id}>
             <h2>{product.name}</h2>
@@ -29,7 +29,7 @@ function ProductList() {
             <img src={product.Image} alt={product.name} />
           </li>
         ))}
-      </ul>
+
     </div>
   );
 }

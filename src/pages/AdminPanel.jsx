@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AdminPanel.css'; 
+import AdminSidebar from '../components/adminSidebar';
 
 const AdminPanel = () => {
  
@@ -9,7 +9,7 @@ const AdminPanel = () => {
   const fetchProducts = async () => {
     try {
     
-      const response = await fetch('your-api-endpoint/products');
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products`);
       const data = await response.json();
       
       setProducts(data);
@@ -40,6 +40,7 @@ const AdminPanel = () => {
   const renderProductCards = () => {
     return products.map((product) => (
       <div key={product.id} className="product-card">
+        <img src={product.image} alt={product.name} />
         <h2>{product.name}</h2>
         <p>{product.description}</p>
         <p>Price: {product.price}</p>
@@ -52,6 +53,7 @@ const AdminPanel = () => {
 
   return (
     <div className="admin-panel-container">
+      <AdminSidebar/>
       <h1>Admin Panel!</h1>
       {/* Button to fetch products */}
       <button onClick={fetchProducts}>Get All Products</button>

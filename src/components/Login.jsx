@@ -1,45 +1,38 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
 
-const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+import { useNavigate } from "react-router-dom";
+
+function Login() {
   const navigate = useNavigate();
+  
 
-  const handleLogin = (event) => {
-    event.preventDefault(); 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+    console.log("Form submitted");
+    const adminUsername = process.env.REACT_APP_ADMIN_USERNAME;
+    const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
 
-   
-    if (username === "admin" && password === "admin123") {
-      
-      navigate("/admin"); 
+    console.log(adminUsername);
+    console.log(adminPassword);
+
+    if (data.username === adminUsername && data.password === adminPassword) {
+      navigate("/admin")
+      localStorage.setItem("accessToken", process.env.REACT_APP_ACCESS_TOKEN);
     } else {
-      alert("Invalid username or password");
+      navigate("/adminLogin");
     }
   };
 
+
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Log In</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Username" name="username" id="username" />
+      <input type="password" placeholder="Password" name="password" id="password" />
+      <button type="submit">Login</button>
+    </form>
   );
-};
+}
 
 export default Login;

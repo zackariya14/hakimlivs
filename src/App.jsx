@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminPanel from "./pages/AdminPanel";
 import Home from "./pages/Home"; 
 import Login from "./components/Login";
-
 import Header from "./components/Header"; 
+import AdminLogin from "./pages/AdminLogin";
+
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<AdminPanel />} />{" "}
+          <Route path="adminLogin" element={<AdminLogin/>}/>
           {/* Protected route for admin panel */}
         </Routes>
       </div>
