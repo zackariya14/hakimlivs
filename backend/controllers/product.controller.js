@@ -80,7 +80,7 @@ export async function searchProducts(req, res) {
 export async function editProduct(req, res) {
     try {
         const id = req.params.id;
-        const { name, category, price, imageURL, description } = req.body;
+        const { name, category, price, Image, description } = req.body;
 
         if (!id) {
             return res.status(400).json({ message: "Product ID is required" });
@@ -90,7 +90,7 @@ export async function editProduct(req, res) {
         if (name) updates.name = name;
         if (category) updates.category = category;
         if (price) updates.price = price;
-        if (imageURL) updates.imageURL = imageURL;
+        if (Image) updates.Image = Image;
         if (description) updates.description = description;
 
         const updatedProduct = await Product.findByIdAndUpdate(id, updates, { new: true });
