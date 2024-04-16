@@ -7,11 +7,12 @@ import categoryRouter from './category.route.js';
 const app = express();
 
 app.use(
-    cors(
-       "*"
-    )
+    cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true
+    })
 );
-
 
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
