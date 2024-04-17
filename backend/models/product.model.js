@@ -19,9 +19,9 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    imageURL: {
+    Image: {
         type: String,
-        required: false
+        required: true
     }
 });
 
