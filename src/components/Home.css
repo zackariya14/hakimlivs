@@ -1,4 +1,4 @@
-*
+
 .header-container{
    
     background-color: #d3d3d330;
@@ -87,4 +87,14 @@ width: 100%;
 
 p {
     margin: 20px 0px;
+}
+
+
+
+
+.cart__link{
+    
+    color: rgb(38, 35, 35) ;
+    text-decoration: none;
+  
 }

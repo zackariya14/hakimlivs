@@ -27,8 +27,17 @@ function ProductList() {
     setSelectedProduct(null);
   };
 
-  const handleBuy = () => {
-    console.log("Produkten köpt:", selectedProduct);
+  const handleBuy = (product) => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProductIndex = cart.findIndex(item => item._id === product._id);
+
+    if (existingProductIndex !== -1) {
+      cart[existingProductIndex].quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   return (
@@ -46,6 +55,7 @@ function ProductList() {
                 <button onClick={() => openModal(product)}>Visa detaljer</button>
               </div>
             </div>
+            <button onClick={() => handleBuy(product)}>Köp {product.name}</button>
             {selectedProduct === product && (
               <div className="modal" style={{ display: 'block' }}>
                 <div className="modal-content">
@@ -57,7 +67,6 @@ function ProductList() {
                 </div>
               </div>
             )}
-            <button onClick={handleBuy}>Köp {product.name}</button>
           </div>
         ))}
       </ul>
