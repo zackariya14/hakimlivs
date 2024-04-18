@@ -1,6 +1,8 @@
 import React from "react";
 import "./Home.css";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
+import Sidebar from './Sidebar';
+
 
 const Header = () => {
   return (
@@ -8,7 +10,9 @@ const Header = () => {
       <div className="leftHeader">
         <div className="search">
           <div className="language"> SV </div>
-          <input type="text" placeholder="Sök..." /> <Search />
+          {/* <input type="text" placeholder="Sök..." /> <Search /> */}
+          < Sidebar />
+
         </div>
       </div>
 

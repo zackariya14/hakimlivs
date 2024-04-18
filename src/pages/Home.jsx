@@ -15,7 +15,7 @@ const Home = () => {
     
     <ProductList />
       
-    <Sidebar />
+    {/* <Sidebar /> */}
 
     <Footer/>
    </div>

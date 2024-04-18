@@ -53,6 +53,7 @@ function ProductList() {
                   <h2>{product.name}</h2>
                   <p>{product.description}</p>
                   <p>Pris: {product.price} kr</p>
+                  <img src={product.Image} alt={product.name} style={{maxHeight: '200px', maxWidth: '200px'}}/>
                 </div>
               </div>
             )}
