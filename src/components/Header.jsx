@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { Link } from 'react-router-dom';
+import Sidebar from "./Sidebar";
 const Header = () => {
   return (
     <div className="header-container">
