@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <div className="header-container">
@@ -19,7 +19,11 @@ const Header = () => {
       <div className="rightHeader">
         
         
-       <div className="cart"> <ShoppingCartOutlined /></div>
+       <div className="cart">
+         <Link to="/cart" className="cart__">
+           <ShoppingCartOutlined />
+     
+       </Link></div>
       
       
       </div>
