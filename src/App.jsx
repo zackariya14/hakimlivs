@@ -7,13 +7,10 @@ import Home from "./pages/Home";
 const App = () =>{
   // return <Home/>;
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/cart" element={<Cart />} />
+    </Routes>
   );
 };
-
 export default App;

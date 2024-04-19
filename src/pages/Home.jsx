@@ -16,11 +16,12 @@ const Home = () => {
     <div>
     <Header/>
     
-    <ProductCategories categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
-    <ProductList products={storeProducts}/>
-      
-    <Sidebar categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
-
+    {/* <ProductCategories categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/> */}
+    <ProductCategories />
+    {/* <ProductList products={storeProducts}/> */}
+    <ProductList />      
+    {/* <Sidebar categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/> */}
+    <Sidebar />
     <Footer/>
    </div>
   )
