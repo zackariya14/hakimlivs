@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import './products.css';
 
-function ProductList( { products = []} ) { const [products, setProducts] = useState([]);
+function ProductList() {
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const [products, setProducts] = useState([])
@@ -36,29 +38,59 @@ function ProductList( { products = []} ) { const [products, setProducts] = useSt
         console.error('Error fetching products:', error);
       }
     };
+
+    fetchProducts();
+  }, []);
+
+  const openModal = (product) => {
+    setSelectedProduct(product);
+  };
   
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
-        setCategories(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-  
-    console.log("categories", categories)
-  
-    const storeProducts = filteredProducts.length > 0 ? filteredProducts : products
+  const closeModal = () => {
+    setSelectedProduct(null);
+  };
+
+  const handleBuy = (product) => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProductIndex = cart.findIndex(item => item._id === product._id);
+
+    if (existingProductIndex !== -1) {
+      cart[existingProductIndex].quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
+
   return (
     <div>
       <ul className='product-container'>
         {products.map(product => (
-          <li className='product-card' key={product._id}>
-            <h2>{product.name}</h2>
-            <p>Price: {product.price}</p>
-            <p>Description: {product.description}</p>
-            <img src={product.Image} alt={product.name} />
-          </li>
+          <div className="product-container" key={product._id}>
+            <div className="image-box">
+              <div className="image-container">
+                <img src={product.Image} alt={product.name} />
+              </div>
+              <div className="image-details">
+                <h4>{product.name}</h4>
+                <p>{product.description}</p>
+                <button onClick={() => openModal(product)}>Visa detaljer</button>
+              </div>
+            </div>
+            <button onClick={() => handleBuy(product)}>Köp {product.name}</button>
+            {selectedProduct === product && (
+              <div className="modal" style={{ display: 'block' }}>
+                <div className="modal-content">
+                  <span className="close" onClick={closeModal}>&times;</span>
+                  <h2>{product.name}</h2>
+                  <p>{product.description}</p>
+                  <p>Pris: {product.price} kr</p>
+                  <img src={product.Image} alt={product.name} style={{maxHeight: '200px', maxWidth: '200px'}}/>
+                </div>
+              </div>
+            )}
+          </div>
         ))}
       </ul>
     </div>
