@@ -1,0 +1,32 @@
+/* App.css */
+.app-container {
+    display: flex; /* Gör att hela innehållet följer en flexbox-layout */
+  }
+  
+  /* Sidebar.css */
+  .sidebar {
+    height: 100vh; /* Sätt höjden till 100% av vyhöjden */
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+  
+  .sidebar.open {
+    width: 250px;
+  }
+  
+  /* Header.css */
+  .header {
+    flex: 0 0 auto; /* Header kommer inte att ändra storlek */
+  }
+  
+  /* Main.css */
+  .main {
+    flex: 1; /* Fyller resten av utrymmet */
+  }
+  
