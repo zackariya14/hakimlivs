@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./components/Login";
 import Header from "./components/Header"; 
 import AdminLogin from "./pages/AdminLogin";
+import AddProduct from "./pages/AddProduct";
 
 
 const App = () => {
@@ -17,7 +18,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<AdminPanel />} />{" "}
-          <Route path="adminLogin" element={<AdminLogin/>}/>
+          <Route path="/adminLogin" element={<AdminLogin/>}/>
+          <Route path="/addProduct" element={<AddProduct/>}/>
           {/* Protected route for admin panel */}
         </Routes>
       </div>

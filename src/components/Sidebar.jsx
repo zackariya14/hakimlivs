@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -16,7 +16,7 @@ const Sidebar = () => {
       </button>
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <ul>
-          <li><a href="#">Hem</a></li>
+          <li><a href="/">Hem</a></li>
           <li><a href="#">Produkter</a></li>
           <li><a href="#">Kampanjer</a></li>
           <li><a href="#">Kundtjänst</a></li>

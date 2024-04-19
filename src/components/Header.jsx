@@ -15,7 +15,9 @@ const Header = () => {
       </div>
 
       <div className="centerHeader">
+        <Link to={"/"}>
         <h1> Hakims Livs. </h1>
+        </Link>
       </div>
 
       <div className="rightHeader">

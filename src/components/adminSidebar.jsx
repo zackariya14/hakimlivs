@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Home, Man, Menu, Phone, ProductionQuantityLimitsOutlined } from '@mui/icons-material';
 
 const AdminSidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -15,7 +15,7 @@ const AdminSidebar = () => {
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <ul>
           <li><a href="./"><Home/>Hem</a></li>
-          <li><a href="#"><ProductionQuantityLimitsOutlined/>Produkter</a></li>
+          <li><a href="/addProduct"><ProductionQuantityLimitsOutlined/>Produkter</a></li>
           <li><a href="#"><Man/>Kunder</a></li>
           <li><a href="#"><Phone/>Kundtjänst</a></li>
         </ul>
