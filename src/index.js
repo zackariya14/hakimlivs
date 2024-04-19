@@ -40,13 +40,10 @@
 
 
 // Importera BrowserRouter från react-router-dom
-import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 
 // Använd BrowserRouter för att omsluta din App-komponent
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
     <App />
-  </BrowserRouter>
 );

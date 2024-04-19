@@ -1,46 +1,8 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import './products.css';
 
-function ProductList() {
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  useEffect(() => {
-    const [products, setProducts] = useState([])
-    const [filteredProducts, setFilteredProducts] = useState([])
-  
-    const [categories, setCategories] = useState([])
-    const [selectedCategory, setSelectedCategory] = useState(null);
-  
-    useEffect(() => {
-      fetchProducts();
-      fetchCategories();
-    }, []);
-  
-    useEffect(() => {
-      console.log("Products", products)
-      console.log("selectedCategory", selectedCategory)
-      if(selectedCategory) {
-        setFilteredProducts(products.filter(product => {
-          const hasCategory = product.category.includes(selectedCategory._id)
-          console.log("product has category", product.name, hasCategory)
-          return hasCategory
-        }))
-      }
-    },[selectedCategory])
-  
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products`);
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+function ProductList( { products = []} ) {
+  const [selectedProduct, setSelectedProduct] =useState(null)
 
   const openModal = (product) => {
     setSelectedProduct(product);
