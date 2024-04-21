@@ -2,27 +2,30 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './products.css';
 
-function ProductList() {
+function ProductList({ categories, selectedCategory, setSelectedCategory }) {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    const fetchProductsAndCategories = async () => {
+    const fetchProducts = async () => {
       try {
-        const productsResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products`);
-        setProducts(productsResponse.data);
-
-        const categoriesResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/categories`);
-        setCategories(categoriesResponse.data);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/products`);
+        setProducts(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching products:', error);
       }
     };
 
-    fetchProductsAndCategories();
+    fetchProducts();
   }, []);
+
+  useEffect(() => {
+    console.log('Selected Category:', selectedCategory);
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    console.log('Products:', products);
+  }, [products]);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -45,19 +48,22 @@ function ProductList() {
     localStorage.setItem('cart', JSON.stringify(cart));
   };
 
+  const filteredProducts = selectedCategory
+    ? products.filter(product => product.category.includes(selectedCategory._id))
+    : products;
+
   return (
     <div>
       <ul className='product-container'>
-        {products.map(product => (
+        {filteredProducts.map(product => (
           <div className="product-container" key={product._id}>
-            <div className="image-box">
+            <div className="product-card">
               <div className="image-container">
-                <img src={product.Image} alt={product.name} />
+                <img src={product.Image} alt={product.name} onClick={() => openModal(product)} style={{cursor: 'pointer'}}/>
               </div>
               <div className="image-details">
                 <h4>{product.name}</h4>
                 <p>{product.description}</p>
-                <button onClick={() => openModal(product)}>Visa detaljer</button>
               </div>
             </div>
             <button onClick={() => handleBuy(product)}>Köp {product.name}</button>

@@ -1,5 +1,3 @@
-// // Sidebar.jsx
-// import React, { useState } from 'react';
 import './Sidebar.css';
 
 
@@ -7,7 +5,7 @@ import './Sidebar.css';
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ProductCategories from './ProductCategories'; // Importera ProductCategories
+import ProductCategories from './ProductCategories'; 
 
 const Sidebar = ({
   categories = [], 
