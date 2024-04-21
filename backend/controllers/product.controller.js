@@ -4,7 +4,7 @@ import Category from '../models/categorymodel.js';
 
 export async function createProduct(req, res) {
     try {
-        const { name, category, price, imageURL, description } = req.body;
+        const { name, category, price, Image, description } = req.body;
 
         if (!name || !price) {
             return res.status(400).json({ message: "Missing required fields" });
@@ -27,7 +27,8 @@ export async function createProduct(req, res) {
             "name": name,
             "category": categoryId,
             "price": price,
-            "imageURL": imageURL
+            "Image": Image,
+            "description": description
         });
 
         console.log("newProduct: ", newProduct);
@@ -56,12 +57,19 @@ export async function searchProducts(req, res) {
     try {
         const { query } = req.body;
 
+        const foundCategory = await Category.find({ name: { $regex: query, $options: 'i' } });
+
+        if (!foundCategory) {
+            return res.status(404).json({ message: "Category not found" });
+        }
+
         const products = await Product.find({
             $or: [
-                { name: { $regex: query, $options: 'i' } }, 
-                { category: { $in: await Category.find({ name: { $regex: query, $options: 'i' } }).select('_id') } } 
+                { name: { $regex: query, $options: 'i' } },
+                { category: { $in: foundCategory.map(category => category._id) } }
             ]
         }).populate('category');
+
         res.status(200).send(products);
     } catch (error) {
         console.error("Error searching products", error);
@@ -69,18 +77,26 @@ export async function searchProducts(req, res) {
     }
 }
 
+
 export async function editProduct(req, res) {
     try {
         const id = req.params.id;
-        const { name, category, price, imageURL, description } = req.body;
+        const { name, category, price, Image, description } = req.body;
 
-        if (!id || !name || !category || !price || !imageURL) {
-            return res.status(400).json({ message: "Missing required fields" });
+        if (!id) {
+            return res.status(400).json({ message: "Product ID is required" });
         }
 
-        const updatedProduct = await Product.findByIdAndUpdate(id, { name, category, price, imageURL }, { new: true });
-        console.log(updatedProduct)
-        res.status(200).send(updatedProduct)
+        const updates = {};
+        if (name) updates.name = name;
+        if (category) updates.category = category;
+        if (price) updates.price = price;
+        if (Image) updates.Image = Image;
+        if (description) updates.description = description;
+
+        const updatedProduct = await Product.findByIdAndUpdate(id, updates, { new: true });
+        console.log(updatedProduct);
+        res.status(200).send(updatedProduct);
 
     } catch (error) {
         res.status(500).json({
@@ -88,6 +104,7 @@ export async function editProduct(req, res) {
         });
     }
 }
+
 
 export async function deleteProduct(req, res) {
     try {

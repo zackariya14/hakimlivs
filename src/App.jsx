@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminPanel from "./pages/AdminPanel";
@@ -26,5 +27,21 @@ const App = () => {
     </BrowserRouter>
   );
 };
+=======
+import React from 'react';
+import { BrowserRouter as Router, Route , Routes} from 'react-router-dom';
+import Cart from './pages/cart';
+import Home from "./pages/Home";
 
+>>>>>>> 3af740f0ea58df2129665ecc4428440df1dce94c
+
+const App = () =>{
+  // return <Home/>;
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/cart" element={<Cart />} />
+    </Routes>
+  );
+};
 export default App;
