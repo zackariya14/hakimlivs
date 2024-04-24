@@ -53,34 +53,17 @@ function ProductList({ categories, selectedCategory, setSelectedCategory }) {
     : products;
 
   return (
-    <div>
-      <ul className='product-container'>
-        {filteredProducts.map(product => (
-          <div className="product-container" key={product._id}>
-            <div className="product-card">
-              <div className="image-container">
-                <img src={product.Image} alt={product.name} onClick={() => openModal(product)} style={{cursor: 'pointer'}}/>
-              </div>
-              <div className="image-details">
-                <h4>{product.name}</h4>
-                <p>{product.description}</p>
-              </div>
-            </div>
-            <button onClick={() => handleBuy(product)}>Köp {product.name}</button>
-            {selectedProduct === product && (
-              <div className="modal" style={{ display: 'block' }}>
-                <div className="modal-content">
-                  <span className="close" onClick={closeModal}>&times;</span>
-                  <h2>{product.name}</h2>
-                  <p>{product.description}</p>
-                  <p>Pris: {product.price} kr</p>
-                  <img src={product.Image} alt={product.name} style={{maxHeight: '200px', maxWidth: '200px'}}/>
-                </div>
-              </div>
-            )}
-          </div>
+    <div className='product-container'>
+      <ul>
+        {products.map(product => (
+          <li className='product-card' key={product._id}>
+            <h2>{product.name}</h2>
+            <p>Price: {product.price}</p>
+            <p>Description: {product.description}</p>
+            <img src={product.Image} alt={product.name} />
+          </li>
         ))}
-      </ul>
+
     </div>
   );
 }
