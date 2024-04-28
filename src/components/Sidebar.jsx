@@ -1,29 +1,37 @@
 import './Sidebar.css';
+
+
+
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ProductCategories from './ProductCategories';
+import ProductCategories from './ProductCategories'; 
 
-const Sidebar = ({ categories = [], selectedCategory, setSelectedCategory }) => {
-  const [sidebarOpen, setsidebarOpen] = useState(false);
+const Sidebar = ({
+  categories = [], 
+  selectedCategory,
+  setSelectedCategory
+ }) => {
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleMenu = () => {
-    setsidebarOpen(!sidebarOpen);
+    setIsOpen(!isOpen);
   };
 
   return (
     <div>
-      <button className="openbtn" onClick={toggleMenu} style={{ fontFamily: "Luckiest Guy" }}>
+      <button className="openbtn" onClick={toggleMenu}>
         ☰ Meny
       </button>
-      <div className={`sidebar ${sidebarOpen ? 'closed' : ''}`}>
+      <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <ul>
-          <h2>Meny</h2>
           <li><Link to="/">Hem</Link></li>
           <li><Link to="/products">Produkter</Link></li>
           <li><Link to="/campaigns">Kampanjer</Link></li>
           <li><Link to="/customer-service">Kundtjänst</Link></li>
-          <p>________________________________________________</p>
+          <li><Link to ="/LoginPage">Logga in</Link> </li>
         </ul>
+        {/* Lägg till ProductCategories-komponenten här */}
         <ProductCategories categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
       </div>
     </div>
@@ -31,3 +39,36 @@ const Sidebar = ({ categories = [], selectedCategory, setSelectedCategory }) => 
 };
 
 export default Sidebar;
+
+
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import ProductCategories from './ProductCategories';
+
+// const Sidebar = ({ products }) => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   const toggleMenu = () => {
+//     setIsOpen(!isOpen);
+//   };
+
+//   return (
+//     <div>
+//       <button className="openbtn" onClick={toggleMenu}>
+//         ☰ Meny
+//       </button>
+//       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+//         <ul>
+//           <li><Link to="/">Hem</Link></li>
+//           <li><Link to="/products">Produkter</Link></li>
+//           <li><Link to="/campaigns">Kampanjer</Link></li>
+//           <li><Link to="/customer-service">Kundtjänst</Link></li>
+//         </ul>
+//         <ProductCategories products={products} />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Sidebar;

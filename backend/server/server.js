@@ -1,7 +1,7 @@
 import app from '../routes/app.js';
 import { connectToDatabase } from './db.js';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const MONGODB_URI = 'mongodb+srv://OlleOllsson:test1234@hakimslivs4.zrzjb7b.mongodb.net/?retryWrites=true&w=majority&appName=Hakimslivs4';
 
 app.listen(port, () => {
@@ -14,4 +14,3 @@ async function run() {
    
 run();
      
-
