@@ -29,6 +29,7 @@ const Sidebar = ({
           <li><Link to="/products">Produkter</Link></li>
           <li><Link to="/campaigns">Kampanjer</Link></li>
           <li><Link to="/customer-service">Kundtjänst</Link></li>
+          <li><Link to ="/LoginPage">Logga in</Link> </li>
         </ul>
         {/* Lägg till ProductCategories-komponenten här */}
         <ProductCategories categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
