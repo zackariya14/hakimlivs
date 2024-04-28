@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb';
 import Admin from '../models/user.model.js';
 import bcrypt from 'bcrypt';
 const uri = "mongodb+srv://OlleOllsson:test1234@hakimslivs4.zrzjb7b.mongodb.net/";
-const dbName= 'Hakimslivs4';
+const dbName= 'test';
 
 
   async function addAdmin(adminData) {
