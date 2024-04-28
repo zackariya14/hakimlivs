@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import "../components/products.css";
 import ProductList from '../components/productlist.jsx';
 import Sidebar from '../components/Sidebar';
-import ProductCategories from '../components/ProductCategories';
 import axios from 'axios';
 
 const Home = () => {
@@ -25,17 +24,16 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className='luckiest-guy-regular'>
       <Header />
-      <ProductCategories 
+      <Sidebar 
         categories={categories} 
         selectedCategory={selectedCategory} 
-        setSelectedCategory={setSelectedCategory} 
+        setSelectedCategory={setSelectedCategory}
       />
       <ProductList 
         selectedCategory={selectedCategory} 
       />
-      <Sidebar />
       <Footer />
     </div>
   )

@@ -1,4 +1,5 @@
 import React from 'react';
+import './products.css';
 
 const ProductCategories = ({ categories = [], selectedCategory, setSelectedCategory }) => {
   const showCategory = (category) => {
@@ -10,6 +11,7 @@ const ProductCategories = ({ categories = [], selectedCategory, setSelectedCateg
   return (
     <div>
       <div className="categories">
+        <h3>Kategorier</h3>
         {categories.map(category => (
           <button 
             type="button" 
